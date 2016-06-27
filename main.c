@@ -29,8 +29,10 @@ void init(void){
 int main(void){
 
 	init();
-	
+	//SYS_DDR |=(1<<PD6);
+	//SYS_PORT |=(1<<PD6);
 	while(1){
+		//uart_putc('a');
         aus_set(readCap());
 	}
 	

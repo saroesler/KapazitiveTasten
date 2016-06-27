@@ -11,7 +11,7 @@
 #include "main.h"
 
 #define DEBUG_TASTEN
-#define DEBUG_EINE_TASTE
+//#define DEBUG_EINE_TASTE
 /************************************************************************
  * Aktiviert den uart.
  * Legt auf den UART die anzahl der Zyklen.
@@ -21,10 +21,10 @@
 #ifdef DEBUG_TASTEN
 #include "serial.h"
 //Einstelugen Debug-Pin (1)
-#define dbFlagPORT PORTA
-#define dbFlagDDR DDRA
-#define dbFlagPIN PINA
-#define dbFlagPin PA1
+#define dbFlagPORT PORTD
+#define dbFlagDDR DDRD
+#define dbFlagPIN PIND
+#define dbFlagPin PD6
 #endif /* DEBUG_TASTEN */
 
 //Einstellungen für die Taste 0-3
@@ -55,7 +55,7 @@
 //zyklen für unberührten Taster
 #define CAP_TOLERANZ 1
 #define CAP_COUNT_MAX 5
-#define CAP_COUNT_MIN 5
+#define CAP_COUNT_MIN -5
 #define CAP_NUM 1
 
 void tasten_init();

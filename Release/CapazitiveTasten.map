@@ -4,12 +4,6 @@ Archive member included because of file (symbol)
                               /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o (exit)
 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
                               ./ausgabe.o (__do_clear_bss)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(itoa.o)
-                              ./tasten.o (itoa)
-/usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(strrev.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(itoa.o) (strrev)
-/usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_udivmodhi4.o)
-                              /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(itoa.o) (__udivmodhi4)
 
 ↵
 Speichereinrichtung
@@ -129,7 +123,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x3b0
+.text           0x0000000000000000      0x3ac
  *(.vectors)
  .vectors       0x0000000000000000       0x54 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
                 0x0000000000000000                __vectors
@@ -210,9 +204,6 @@ END GROUP
  .text          0x000000000000007c        0x0 ./tasten.o
  .text          0x000000000000007c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text          0x000000000000007c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
- .text          0x000000000000007c        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(itoa.o)
- .text          0x000000000000007c        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(strrev.o)
- .text          0x000000000000007c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_udivmodhi4.o)
                 0x000000000000007c                . = ALIGN (0x2)
  *(.text.*)
  .text.__vector_11
@@ -255,59 +246,42 @@ END GROUP
  .text.capLeeren
                 0x000000000000020e        0xc ./tasten.o
                 0x000000000000020e                capLeeren
- .text.readCap  0x000000000000021a      0x108 ./tasten.o
-                0x000000000000021a                readCap
+ .text.readOneCap
+                0x000000000000021a       0x60 ./tasten.o
+                0x000000000000021a                readOneCap
+ .text.readCap  0x000000000000027a      0x12e ./tasten.o
+                0x000000000000027a                readCap
  .text.libgcc.mul
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.div
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
- .text.libgcc   0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.mul
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.div
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
- .text.libgcc   0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.prologue
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.builtins
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.fmul
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  .text.libgcc.fixed
-                0x0000000000000322        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
- .text.avr-libc
-                0x0000000000000322       0x42 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(itoa.o)
-                0x0000000000000322                itoa
- .text.avr-libc
-                0x0000000000000364       0x20 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(strrev.o)
-                0x0000000000000364                strrev
- .text.libgcc.mul
-                0x0000000000000384        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_udivmodhi4.o)
- .text.libgcc.div
-                0x0000000000000384       0x28 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_udivmodhi4.o)
-                0x0000000000000384                __udivmodhi4
- .text.libgcc   0x00000000000003ac        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_udivmodhi4.o)
- .text.libgcc.prologue
-                0x00000000000003ac        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_udivmodhi4.o)
- .text.libgcc.builtins
-                0x00000000000003ac        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_udivmodhi4.o)
- .text.libgcc.fmul
-                0x00000000000003ac        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_udivmodhi4.o)
- .text.libgcc.fixed
-                0x00000000000003ac        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_udivmodhi4.o)
-                0x00000000000003ac                . = ALIGN (0x2)
+                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000003a8                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000000000003ac        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
-                0x00000000000003ac                exit
-                0x00000000000003ac                _exit
+ .fini9         0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000003a8                exit
+                0x00000000000003a8                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -326,11 +300,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000000000003ac        0x4 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .fini0         0x00000000000003a8        0x4 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x00000000000003b0                _etext = .
+                0x00000000000003ac                _etext = .
 
-.data           0x0000000000800060        0x0 load address 0x00000000000003b0
+.data           0x0000000000800060        0x0 load address 0x00000000000003ac
                 0x0000000000800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
@@ -341,9 +315,6 @@ END GROUP
  .data          0x0000000000800060        0x0 ./tasten.o
  .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
- .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(itoa.o)
- .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(strrev.o)
- .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_udivmodhi4.o)
  *(.data*)
  *(.rodata)
  *(.rodata*)
@@ -363,9 +334,6 @@ END GROUP
  .bss           0x0000000000800060        0x0 ./tasten.o
  .bss           0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .bss           0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
- .bss           0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(itoa.o)
- .bss           0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(strrev.o)
- .bss           0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_udivmodhi4.o)
  *(.bss*)
  .bss.ausgabe   0x0000000000800060        0x1 ./ausgabe.o
  .bss.abweich_count
@@ -378,8 +346,8 @@ END GROUP
                 0x0000000000800065       0x80 ./tasten.o
  *(COMMON)
                 0x00000000008000e5                PROVIDE (__bss_end, .)
-                0x00000000000003b0                __data_load_start = LOADADDR (.data)
-                0x00000000000003b0                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x00000000000003ac                __data_load_start = LOADADDR (.data)
+                0x00000000000003ac                __data_load_end = (__data_load_start + SIZEOF (.data))
 
 .noinit         0x00000000008000e5        0x0
                 0x00000000008000e5                PROVIDE (__noinit_start, .)
@@ -407,17 +375,13 @@ END GROUP
 .user_signatures
  *(.user_signatures*)
 
-.stab           0x0000000000000000      0x954
+.stab           0x0000000000000000      0x6cc
  *(.stab)
  .stab          0x0000000000000000      0x6cc /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
- .stab          0x00000000000006cc      0x1b0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(itoa.o)
-                                        0x1bc (size before relaxing)
- .stab          0x000000000000087c       0xd8 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/libc.a(strrev.o)
-                                         0xe4 (size before relaxing)
 
-.stabstr        0x0000000000000000       0xb4
+.stabstr        0x0000000000000000       0x54
  *(.stabstr)
- .stabstr       0x0000000000000000       0xb4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
+ .stabstr       0x0000000000000000       0x54 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
 
 .stab.excl
  *(.stab.excl)

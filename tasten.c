@@ -64,39 +64,64 @@ void capLeeren(void){
 	CAP_PORT1 = 0x00;
 }
 
+uint8_t readOneCap(uint8_t ii, volatile uint8_t * pinptr){
+	//initialisieren
+	capStart();
+
+	uint8_t mask = (1 << ((ii * 2)%8 + 1));
+	uint8_t zykles = 0;
+
+	while(zykles < 255){
+		//Sensor aufladen
+		//uart_putc(laufzeit_buffer[0][counter]);
+		capLaden();
+
+		//kurz warten
+		for(uint8_t i = 0; i < 200; i ++);
+
+		//sendor leeren
+		capLeeren();
+
+		//Ladung messen
+		if((*pinptr) & mask)
+			return zykles;
+		zykles ++;
+
+	}
+	return 255;
+}
+
 uint8_t readCap(void){
 	
 	//Mittelwerte berrechnen
 	uint8_t avg[8];
 	for (uint8_t ii = 0; ii<CAP_NUM; ii++) {
-		uint16_t avg_temp = 0;
+		int16_t avg_temp = 0;
 		for(uint8_t jj = 0; jj<128; jj++) {
 			avg_temp += laufzeit_buffer[ii][jj];
 		}
-		avg[ii] = (avg_temp << 7);
+		avg[ii] = (avg_temp / 128);
 		//Spalte initialisieren
 		laufzeit_buffer[ii][counter] = 0;
 	}
 	
-	uint8_t ready = 0;
-	uint8_t zykles = 0;
-
 	//speicher für die Laufzeit
 	
 	//caps entleeren
-	capStart();
+	/*capStart();
 
 	//bis alle caps voll sind
 #ifdef DEBUG_EINE_TASTE
-	while(ready & 0x01){
+	while(!(ready & 0x01)){
 #else
-	while(ready == 0xff){
+	while(ready != 0xff){
 #endif
 		//Sensor aufladen
+		//uart_putc(laufzeit_buffer[0][counter]);
 		capLaden();
 
 		//kurz warten
-		for(uint8_t i = 0; i < 100; i ++);
+		for(uint8_t i = 0; i < 200; i ++);
 
 		//sendor leeren
 		capLeeren();
@@ -106,22 +131,45 @@ uint8_t readCap(void){
 		for(uint8_t i = 0; i < CAP_NUM; i ++){
 			if(i == 4)
 				pinptr = &CAP_PIN1;
+			uint8_t mask = (1 << ((i * 2)%8 +1));
 
-			if( ((*pinptr) & (1<< ((i >> 1)%4)))
-					&& laufzeit_buffer[i][counter] == 0)
-				laufzeit_buffer[i][counter] = zykles;
+			//Referenz erreicht und noch nicht gespeichert
+			if(((*pinptr) & mask) && (ready & (1<<i)) == 0){
+				//pinzykles[i] = zykles;
+				ready |= (1<< i);
+				/*if(laufzeit_buffer[i][counter] == 0){
+					laufzeit_buffer[i][counter] = zykles;
+					ready |= (1<< i);
+				}
+			}
+		}
+
+		if(zykles == 0xff){
+			ready = 0xff;
 		}
 		zykles++;
+	}*/
+
+	volatile uint8_t * pinptr = &CAP_PIN0;
+
+	//caps nacheinander lesen
+	for(uint8_t ii = 0; ii < CAP_NUM; ii ++){
+		if(ii == 4)
+			pinptr = &CAP_PIN1;
+		laufzeit_buffer[ii][counter] = readOneCap(ii, pinptr);
 	}
-	
+
 #ifdef DEBUG_TASTEN
-	char buffer[5];
-	itoa(laufzeit_buffer[0][counter], buffer ,10);
-	uart_putstring((uint8_t*)buffer);
-	uart_putc('\n');
+	uart_putc(100);
+	for(uint8_t ii = 0; ii < CAP_NUM; ii ++){
+		uart_putc(laufzeit_buffer[ii][counter]);
+		uart_putc(avg[ii]);
+	}
 #endif
+
 	//Auswertung
 	for(uint8_t ii = 0; ii<CAP_NUM; ii++) {
+		//wenn Pin an, dann prüfe, ob laufzeit wieder steigt
 		if(status & (1<<ii)) {
 			if (laufzeit_buffer[ii][counter] > (avg[ii] + CAP_TOLERANZ)) {
 				abweich_count[ii]++;
@@ -133,10 +181,12 @@ uint8_t readCap(void){
 				status &= ~(1<<ii);
 				tasten_ausgabe &= ~(1<<zuordnung[ii]);
 			}
-			
+		//wenn Pin aus, dann prüfe, ob laufzeit singt
 		} else {
+			uart_putc('c');
 			if (laufzeit_buffer[ii][counter] < (avg[ii] - CAP_TOLERANZ)) {
 				abweich_count[ii]--;
+				uart_putc('m');
 			} else {
 				abweich_count[ii] = 0;
 			}
@@ -147,16 +197,22 @@ uint8_t readCap(void){
 			}
 		}
 	}
-
-	counter++;
+#ifdef DEBUG_TASTEN
+	for(uint8_t ii = 0; ii < CAP_NUM; ii ++){
+		uart_putc(abweich_count[ii]);
+	}
+	uart_putc('\n');
+#endif
 
 #ifdef DEBUG_TASTEN
-	if(tasten_ausgabe & (1<<0)){	//Wenn erste Taste gedrückt
+	if(status & (1<<0)){	//Wenn erste Taste gedrückt
 		SYS_PORT &= ~(1 << LED);	//LED aus
 	} else {
 		SYS_PORT |= (1 << LED);		//LED an
 	}
 #endif
+
+	counter++;
 
 	return tasten_ausgabe;
 }
