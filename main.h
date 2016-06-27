@@ -20,6 +20,7 @@
 
 #include <avr/io.h>
 #include <stdint.h>
+#include <stdlib.h>		//für itoa
 
 #include "tasten.h"
 #include "pwm.h"

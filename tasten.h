@@ -10,7 +10,8 @@
 
 #include "main.h"
 
-//#define DEBUG_TASTEN
+#define DEBUG_TASTEN
+#define DEBUG_EINE_TASTE
 /************************************************************************
  * Aktiviert den uart.
  * Legt auf den UART die anzahl der Zyklen.
@@ -55,6 +56,7 @@
 #define CAP_TOLERANZ 1
 #define CAP_COUNT_MAX 5
 #define CAP_COUNT_MIN 5
+#define CAP_NUM 1
 
 void tasten_init();
 uint8_t readCap(void);

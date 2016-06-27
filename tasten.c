@@ -6,11 +6,11 @@
  */
 #include "tasten.h"
 
-static uint8_t laufzeit_buffer[8][128];
+static uint8_t laufzeit_buffer[CAP_NUM][128];
 static uint8_t counter = 0;
 static uint8_t status = 0;
 static uint8_t tasten_ausgabe = 0;
-static int8_t abweich_count[8];
+static int8_t abweich_count[CAP_NUM];
 static uint8_t zuordnung[8] = {T_WECKER,T_MENUE,T_RUNTER,T_RECHTS,T_HOCH,T_SNNOZE,T_LINKS,T_ENTER};
 
 
@@ -19,7 +19,7 @@ void tasten_init() {
 	uart_init();
 	dbFlagDDR |= (1<<dbFlagPin);
 	#endif
-	for (uint8_t ii = 0; ii<8; ii++) {
+	for (uint8_t ii = 0; ii<CAP_NUM; ii++) {
 		for (uint8_t jj = 0; jj<128; jj++) {
 			laufzeit_buffer[ii][jj] = 0;
 		}
@@ -68,7 +68,7 @@ uint8_t readCap(void){
 	
 	//Mittelwerte berrechnen
 	uint8_t avg[8];
-	for (uint8_t ii = 0; ii<8; ii++) {
+	for (uint8_t ii = 0; ii<CAP_NUM; ii++) {
 		uint16_t avg_temp = 0;
 		for(uint8_t jj = 0; jj<128; jj++) {
 			avg_temp += laufzeit_buffer[ii][jj];
@@ -87,7 +87,11 @@ uint8_t readCap(void){
 	capStart();
 
 	//bis alle caps voll sind
+#ifdef DEBUG_EINE_TASTE
+	while(ready & 0x01){
+#else
 	while(ready == 0xff){
+#endif
 		//Sensor aufladen
 		capLaden();
 
@@ -99,7 +103,7 @@ uint8_t readCap(void){
 
 		//Ladung messen
 		volatile uint8_t * pinptr = &CAP_PIN0;
-		for(uint8_t i = 0; i < 8; i ++){
+		for(uint8_t i = 0; i < CAP_NUM; i ++){
 			if(i == 4)
 				pinptr = &CAP_PIN1;
 
@@ -110,8 +114,14 @@ uint8_t readCap(void){
 		zykles++;
 	}
 	
+#ifdef DEBUG_TASTEN
+	char buffer[5];
+	itoa(laufzeit_buffer[0][counter], buffer ,10);
+	uart_putstring((uint8_t*)buffer);
+	uart_putc('\n');
+#endif
 	//Auswertung
-	for(uint8_t ii = 0; ii<8; ii++) {
+	for(uint8_t ii = 0; ii<CAP_NUM; ii++) {
 		if(status & (1<<ii)) {
 			if (laufzeit_buffer[ii][counter] > (avg[ii] + CAP_TOLERANZ)) {
 				abweich_count[ii]++;
