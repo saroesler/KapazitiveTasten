@@ -150,5 +150,13 @@ uint8_t readCap(void){
 
 	counter++;
 
+#ifdef DEBUG_TASTEN
+	if(tasten_ausgabe & (1<<0)){	//Wenn erste Taste gedrückt
+		SYS_PORT &= ~(1 << LED);	//LED aus
+	} else {
+		SYS_PORT |= (1 << LED);		//LED an
+	}
+#endif
+
 	return tasten_ausgabe;
 }

@@ -16,8 +16,12 @@ void uart_init() {
 	/* U2X-Modus nicht erforderlich */
 	UCSRA &= ~(1 << U2X);
 	#endif
+	/* Enable receiver and transmitter */
 	UCSRB |= (1<<TXEN);
+
+	/*Asynchron Modus*/
 	UCSRC &= ~(1<<UMSEL);
+	/* Set frame format: 8data, 2stop bit */
 	UCSRC = (1<<URSEL)|(1<<USBS)|(3<<UCSZ0);
 	//UCSRC |= (1<<UCSZ0)|(1<<UCSZ1);
 }

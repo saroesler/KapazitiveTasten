@@ -1,5 +1,5 @@
-Release
+Release/*
 
-Debug
+Debug/*
 
-.settings
+.settings/*
