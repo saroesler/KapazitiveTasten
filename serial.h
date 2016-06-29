@@ -11,7 +11,7 @@
 
 #include <avr/io.h>
 #ifndef F_CPU
-#define F_CPU 8000000 /* evtl. bereits via Compilerparameter definiert */
+#define F_CPU 16000000 /* evtl. bereits via Compilerparameter definiert */
 #endif
 #define BAUD 9600
 #include <util/setbaud.h>

@@ -53,10 +53,11 @@
 #define T_PFEILMASKE 0x0F
 
 //zyklen für unberührten Taster
-#define CAP_TOLERANZ 1
-#define CAP_COUNT_MAX 5
+#define CAP_TOLERANZ 10
+#define CAP_COUNT_MAX 10
 #define CAP_COUNT_MIN -5
-#define CAP_NUM 1
+#define CAP_NUM 8
+#define BUFFER_SIZE 64
 
 void tasten_init();
 uint8_t readCap(void);

@@ -2,6 +2,8 @@ Archive member included because of file (symbol)
 
 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
                               /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o (exit)
+/usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+                              ./tasten.o (__do_copy_data)
 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
                               ./ausgabe.o (__do_clear_bss)
 
@@ -123,7 +125,7 @@ END GROUP
 .rela.plt
  *(.rela.plt)
 
-.text           0x0000000000000000      0x3ac
+.text           0x0000000000000000      0x4f4
  *(.vectors)
  .vectors       0x0000000000000000       0x54 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
                 0x0000000000000000                __vectors
@@ -161,8 +163,10 @@ END GROUP
  *(.init3)
  *(.init3)
  *(.init4)
- .init4         0x0000000000000060       0x10 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
-                0x0000000000000060                __do_clear_bss
+ .init4         0x0000000000000060       0x16 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+                0x0000000000000060                __do_copy_data
+ .init4         0x0000000000000076       0x10 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x0000000000000076                __do_clear_bss
  *(.init4)
  *(.init5)
  *(.init5)
@@ -173,115 +177,127 @@ END GROUP
  *(.init8)
  *(.init8)
  *(.init9)
- .init9         0x0000000000000070        0x8 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
+ .init9         0x0000000000000086        0x8 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
  *(.init9)
  *(.text)
- .text          0x0000000000000078        0x4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
-                0x0000000000000078                __vector_1
-                0x0000000000000078                __vector_12
-                0x0000000000000078                __bad_interrupt
-                0x0000000000000078                __vector_6
-                0x0000000000000078                __vector_3
-                0x0000000000000078                __vector_13
-                0x0000000000000078                __vector_17
-                0x0000000000000078                __vector_19
-                0x0000000000000078                __vector_7
-                0x0000000000000078                __vector_5
-                0x0000000000000078                __vector_4
-                0x0000000000000078                __vector_9
-                0x0000000000000078                __vector_2
-                0x0000000000000078                __vector_15
-                0x0000000000000078                __vector_8
-                0x0000000000000078                __vector_14
-                0x0000000000000078                __vector_10
-                0x0000000000000078                __vector_16
-                0x0000000000000078                __vector_18
-                0x0000000000000078                __vector_20
- .text          0x000000000000007c        0x0 ./ausgabe.o
- .text          0x000000000000007c        0x0 ./main.o
- .text          0x000000000000007c        0x0 ./pwm.o
- .text          0x000000000000007c        0x0 ./serial.o
- .text          0x000000000000007c        0x0 ./tasten.o
- .text          0x000000000000007c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
- .text          0x000000000000007c        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
-                0x000000000000007c                . = ALIGN (0x2)
+ .text          0x000000000000008e        0x4 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
+                0x000000000000008e                __vector_1
+                0x000000000000008e                __vector_12
+                0x000000000000008e                __bad_interrupt
+                0x000000000000008e                __vector_6
+                0x000000000000008e                __vector_3
+                0x000000000000008e                __vector_11
+                0x000000000000008e                __vector_13
+                0x000000000000008e                __vector_17
+                0x000000000000008e                __vector_19
+                0x000000000000008e                __vector_7
+                0x000000000000008e                __vector_5
+                0x000000000000008e                __vector_4
+                0x000000000000008e                __vector_9
+                0x000000000000008e                __vector_2
+                0x000000000000008e                __vector_15
+                0x000000000000008e                __vector_8
+                0x000000000000008e                __vector_14
+                0x000000000000008e                __vector_10
+                0x000000000000008e                __vector_16
+                0x000000000000008e                __vector_18
+                0x000000000000008e                __vector_20
+ .text          0x0000000000000092        0x0 ./ausgabe.o
+ .text          0x0000000000000092        0x0 ./main.o
+ .text          0x0000000000000092        0x0 ./pwm.o
+ .text          0x0000000000000092        0x0 ./serial.o
+ .text          0x0000000000000092        0x0 ./tasten.o
+ .text          0x0000000000000092        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .text          0x0000000000000092        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+ .text          0x0000000000000092        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x0000000000000092                . = ALIGN (0x2)
  *(.text.*)
- .text.__vector_11
-                0x000000000000007c       0x88 ./ausgabe.o
-                0x000000000000007c                __vector_11
  .text.init_aus
-                0x0000000000000104        0xe ./ausgabe.o
-                0x0000000000000104                init_aus
+                0x0000000000000092        0x6 ./ausgabe.o
+                0x0000000000000092                init_aus
  .text.aus_refrech
-                0x0000000000000112       0x34 ./ausgabe.o
-                0x0000000000000112                aus_refrech
- .text.aus_set  0x0000000000000146        0x8 ./ausgabe.o
-                0x0000000000000146                aus_set
- .text.init     0x000000000000014e       0x18 ./main.o
-                0x000000000000014e                init
+                0x0000000000000098       0x92 ./ausgabe.o
+                0x0000000000000098                aus_refrech
+ .text.aus_set  0x000000000000012a       0x12 ./ausgabe.o
+                0x000000000000012a                aus_set
+ .text.init     0x000000000000013c       0x18 ./main.o
+                0x000000000000013c                init
  .text.startup.main
-                0x0000000000000166        0xe ./main.o
-                0x0000000000000166                main
+                0x0000000000000154       0x14 ./main.o
+                0x0000000000000154                main
  .text.init_PWM
-                0x0000000000000174       0x20 ./pwm.o
-                0x0000000000000174                init_PWM
+                0x0000000000000168       0x24 ./pwm.o
+                0x0000000000000168                init_PWM
  .text.uart_init
-                0x0000000000000194       0x16 ./serial.o
-                0x0000000000000194                uart_init
+                0x000000000000018c       0x16 ./serial.o
+                0x000000000000018c                uart_init
  .text.uart_putc
-                0x00000000000001aa        0x8 ./serial.o
-                0x00000000000001aa                uart_putc
+                0x00000000000001a2        0x8 ./serial.o
+                0x00000000000001a2                uart_putc
  .text.uart_putstring
-                0x00000000000001b2       0x18 ./serial.o
-                0x00000000000001b2                uart_putstring
+                0x00000000000001aa       0x18 ./serial.o
+                0x00000000000001aa                uart_putstring
  .text.tasten_init
-                0x00000000000001ca       0x1c ./tasten.o
-                0x00000000000001ca                tasten_init
+                0x00000000000001c2       0x32 ./tasten.o
+                0x00000000000001c2                tasten_init
  .text.capStart
-                0x00000000000001e6       0x10 ./tasten.o
-                0x00000000000001e6                capStart
+                0x00000000000001f4        0xc ./tasten.o
+                0x00000000000001f4                capStart
  .text.capLaden
-                0x00000000000001f6       0x18 ./tasten.o
-                0x00000000000001f6                capLaden
+                0x0000000000000200       0x18 ./tasten.o
+                0x0000000000000200                capLaden
  .text.capLeeren
-                0x000000000000020e        0xc ./tasten.o
-                0x000000000000020e                capLeeren
+                0x0000000000000218        0xc ./tasten.o
+                0x0000000000000218                capLeeren
  .text.readOneCap
-                0x000000000000021a       0x60 ./tasten.o
-                0x000000000000021a                readOneCap
- .text.readCap  0x000000000000027a      0x12e ./tasten.o
-                0x000000000000027a                readCap
+                0x0000000000000224       0x60 ./tasten.o
+                0x0000000000000224                readOneCap
+ .text.readCap  0x0000000000000284      0x26c ./tasten.o
+                0x0000000000000284                readCap
  .text.libgcc.mul
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.div
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
- .text.libgcc   0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .text.libgcc   0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.prologue
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.builtins
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.fmul
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.fixed
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  .text.libgcc.mul
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.div
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
- .text.libgcc   0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc   0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.prologue
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.builtins
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.fmul
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .text.libgcc.fixed
-                0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
-                0x00000000000003a8                . = ALIGN (0x2)
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+ .text.libgcc.mul
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.div
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc   0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.prologue
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.builtins
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.fmul
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .text.libgcc.fixed
+                0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+                0x00000000000004f0                . = ALIGN (0x2)
  *(.fini9)
- .fini9         0x00000000000003a8        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
-                0x00000000000003a8                exit
-                0x00000000000003a8                _exit
+ .fini9         0x00000000000004f0        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+                0x00000000000004f0                exit
+                0x00000000000004f0                _exit
  *(.fini9)
  *(.fini8)
  *(.fini8)
@@ -300,11 +316,11 @@ END GROUP
  *(.fini1)
  *(.fini1)
  *(.fini0)
- .fini0         0x00000000000003a8        0x4 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .fini0         0x00000000000004f0        0x4 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
  *(.fini0)
-                0x00000000000003ac                _etext = .
+                0x00000000000004f4                _etext = .
 
-.data           0x0000000000800060        0x0 load address 0x00000000000003ac
+.data           0x0000000000800060        0x8 load address 0x00000000000004f4
                 0x0000000000800060                PROVIDE (__data_start, .)
  *(.data)
  .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
@@ -314,47 +330,51 @@ END GROUP
  .data          0x0000000000800060        0x0 ./serial.o
  .data          0x0000000000800060        0x0 ./tasten.o
  .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
  .data          0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  *(.data*)
  *(.rodata)
  *(.rodata*)
+ .rodata.zuordnung
+                0x0000000000800060        0x8 ./tasten.o
  *(.gnu.linkonce.d*)
-                0x0000000000800060                . = ALIGN (0x2)
-                0x0000000000800060                _edata = .
-                0x0000000000800060                PROVIDE (__data_end, .)
+                0x0000000000800068                . = ALIGN (0x2)
+                0x0000000000800068                _edata = .
+                0x0000000000800068                PROVIDE (__data_end, .)
 
-.bss            0x0000000000800060       0x85
-                0x0000000000800060                PROVIDE (__bss_start, .)
+.bss            0x0000000000800068      0x20c
+                0x0000000000800068                PROVIDE (__bss_start, .)
  *(.bss)
- .bss           0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
- .bss           0x0000000000800060        0x0 ./ausgabe.o
- .bss           0x0000000000800060        0x0 ./main.o
- .bss           0x0000000000800060        0x0 ./pwm.o
- .bss           0x0000000000800060        0x0 ./serial.o
- .bss           0x0000000000800060        0x0 ./tasten.o
- .bss           0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
- .bss           0x0000000000800060        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
+ .bss           0x0000000000800068        0x0 /usr/lib/gcc/avr/4.8.2/../../../avr/lib/avr5/crtm32.o
+ .bss           0x0000000000800068        0x0 ./ausgabe.o
+ .bss           0x0000000000800068        0x0 ./main.o
+ .bss           0x0000000000800068        0x0 ./pwm.o
+ .bss           0x0000000000800068        0x0 ./serial.o
+ .bss           0x0000000000800068        0x0 ./tasten.o
+ .bss           0x0000000000800068        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_exit.o)
+ .bss           0x0000000000800068        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_copy_data.o)
+ .bss           0x0000000000800068        0x0 /usr/lib/gcc/avr/4.8.2/avr5/libgcc.a(_clear_bss.o)
  *(.bss*)
- .bss.ausgabe   0x0000000000800060        0x1 ./ausgabe.o
+ .bss.ausgabe   0x0000000000800068        0x1 ./ausgabe.o
  .bss.abweich_count
-                0x0000000000800061        0x1 ./tasten.o
+                0x0000000000800069        0x8 ./tasten.o
  .bss.tasten_ausgabe
-                0x0000000000800062        0x1 ./tasten.o
- .bss.status    0x0000000000800063        0x1 ./tasten.o
- .bss.counter   0x0000000000800064        0x1 ./tasten.o
+                0x0000000000800071        0x1 ./tasten.o
+ .bss.status    0x0000000000800072        0x1 ./tasten.o
+ .bss.counter   0x0000000000800073        0x1 ./tasten.o
  .bss.laufzeit_buffer
-                0x0000000000800065       0x80 ./tasten.o
+                0x0000000000800074      0x200 ./tasten.o
  *(COMMON)
-                0x00000000008000e5                PROVIDE (__bss_end, .)
-                0x00000000000003ac                __data_load_start = LOADADDR (.data)
-                0x00000000000003ac                __data_load_end = (__data_load_start + SIZEOF (.data))
+                0x0000000000800274                PROVIDE (__bss_end, .)
+                0x00000000000004f4                __data_load_start = LOADADDR (.data)
+                0x00000000000004fc                __data_load_end = (__data_load_start + SIZEOF (.data))
 
-.noinit         0x00000000008000e5        0x0
-                0x00000000008000e5                PROVIDE (__noinit_start, .)
+.noinit         0x0000000000800274        0x0
+                0x0000000000800274                PROVIDE (__noinit_start, .)
  *(.noinit*)
-                0x00000000008000e5                PROVIDE (__noinit_end, .)
-                0x00000000008000e5                _end = .
-                0x00000000008000e5                PROVIDE (__heap_start, .)
+                0x0000000000800274                PROVIDE (__noinit_end, .)
+                0x0000000000800274                _end = .
+                0x0000000000800274                PROVIDE (__heap_start, .)
 
 .eeprom         0x0000000000810000        0x0
  *(.eeprom*)

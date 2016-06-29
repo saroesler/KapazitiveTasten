@@ -8,7 +8,9 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-#define F_CPU 8000000
+#ifndef F_CPU
+#define F_CPU 16000000
+#endif
 
 //#define DEBUG_MAIN
 /************************************************************************

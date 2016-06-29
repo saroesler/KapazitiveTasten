@@ -15,9 +15,9 @@
 #include <avr/interrupt.h>
 #include "tasten.h"
 
-#define AUS_PORT PORTC
-#define AUS_DDR DDRC
-#define AUS_PIN PINC
+#define AUS_PORT PORTB
+#define AUS_DDR DDRB
+#define AUS_PIN PINB
 
 #define AUS_SYS_PORT PORTD
 #define AUS_SYS_DDR DDRD
@@ -25,13 +25,13 @@
 #define AUS_MAN_P PD3
 #define AUS_TAST_TON PD2
 
-#define AUS_TIMER_AN TCCR0 = (1<<CS02)|(1<<CS00)
-#define AUS_TIMER_AUS TCCR0 = 0
+#define AUS_TIMER_AN TCCR2 = (1<<CS22)|(1<<CS21)
+#define AUS_TIMER_AUS TCCR2 = 0
 
 
 
 
-// Freigegbene Tasten trotz Menüsperre
+// Freigegbene Tasten trotz Menï¿½sperre
 #define MAN_AUS_MASK ~T_PFEILMASKE
 
 //extern uint8_t ausgabe;

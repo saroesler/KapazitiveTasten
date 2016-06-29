@@ -34,6 +34,8 @@ int main(void){
 	while(1){
 		//uart_putc('a');
         aus_set(readCap());
+		//uart_putc(readCap());
+		uart_putc('\n');
 	}
 	
 	return 1;

@@ -11,5 +11,5 @@ void init_PWM() {
 	TCCR1A |= (1<<WGM10)|(1<<COM1A1)|(1<<COM1B1);
 	TCCR1B |= (1<<WGM12)|(1<<CS10);
 	OCR1A = 200;
-	OCR1B = 200;
+	OCR1B = 150;
 }
