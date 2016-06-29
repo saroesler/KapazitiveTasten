@@ -67,7 +67,6 @@ uint8_t readOneCap(uint8_t ii, volatile uint8_t * pinptr){
 
 	while(zykles < 255){
 		//Sensor aufladen
-		//uart_putc(laufzeit_buffer[0][counter]);
 		capLaden();
 
 		//kurz warten

@@ -71,7 +71,10 @@ void aus_refrech() {
 }
 
 void aus_set(uint8_t val) {
+#ifdef DEBUG_TASTEN
 	uart_putc(val);
+	uart_putc('\n')
+#endif
 	ausgabe = val;
 	aus_refrech();
 }

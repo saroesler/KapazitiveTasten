@@ -10,7 +10,7 @@
 
 #include "main.h"
 
-#define DEBUG_TASTEN
+//#define DEBUG_TASTEN
 //#define DEBUG_EINE_TASTE
 /************************************************************************
  * Aktiviert den uart.
