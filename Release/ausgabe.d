@@ -1,4 +1,5 @@
-ausgabe.d: ../ausgabe.c ../ausgabe.h ../pwm.h ../tasten.h ../main.h
+ausgabe.d: ../ausgabe.c ../ausgabe.h ../pwm.h ../tasten.h ../main.h \
+ ../serial.h
 
 ../ausgabe.h:
 
@@ -7,3 +8,5 @@ ausgabe.d: ../ausgabe.c ../ausgabe.h ../pwm.h ../tasten.h ../main.h
 ../tasten.h:
 
 ../main.h:
+
+../serial.h:

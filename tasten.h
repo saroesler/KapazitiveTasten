@@ -9,6 +9,7 @@
 #define CAPAZITIVETASTEN_H_
 
 #include "main.h"
+//#include <util/delay.h>
 
 //#define DEBUG_TASTEN
 //#define DEBUG_EINE_TASTE
@@ -18,7 +19,7 @@
  * Aktiviert den Debug-Pin (1) um den Begin eines Ladevorgangs am Oszi 
  * triggern zu können.
  */
-#ifdef DEBUG_TASTEN
+#ifdef DEBUG_TASTEN_TRIGGER
 #include "serial.h"
 //Einstelugen Debug-Pin (1)
 #define dbFlagPORT PORTD
@@ -53,11 +54,12 @@
 #define T_PFEILMASKE 0x0F
 
 //zyklen für unberührten Taster
-#define CAP_TOLERANZ 10
-#define CAP_COUNT_MAX 10
+#define CAP_TOLERANZ_AN 4
+#define CAP_TOLERANZ_AUS 2
+#define CAP_COUNT_MAX 6
 #define CAP_COUNT_MIN -5
 #define CAP_NUM 8
-#define BUFFER_SIZE 64
+#define BUFFER_SIZE 32
 
 void tasten_init();
 uint8_t readCap(void);

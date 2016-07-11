@@ -7,6 +7,9 @@
 
 #ifndef MAIN_H_
 #define MAIN_H_
+//#define DEBUG_TASTEN
+//#define DEBUG_MAIN
+#define DEBUG_TASTEN_TRIGGER
 
 #ifndef F_CPU
 #define F_CPU 16000000

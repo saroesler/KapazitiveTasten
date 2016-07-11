@@ -28,6 +28,9 @@
 #define AUS_TIMER_AN TCCR2 = (1<<CS22)|(1<<CS21)
 #define AUS_TIMER_AUS TCCR2 = 0
 
+#define PWM_SCALE_MAX 3
+#define PWM_SCALE_MIN -3
+
 
 
 

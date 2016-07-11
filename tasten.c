@@ -17,6 +17,9 @@ static uint8_t zuordnung[8] = {T_WECKER,T_MENUE,T_RUNTER,T_RECHTS,T_SNNOZE,T_HOC
 void tasten_init() {
 	#ifdef DEBUG_TASTEN
 	uart_init();
+	#endif
+
+	#ifdef DEBUG_TASTEN_TRIGGER
 	dbFlagDDR |= (1<<dbFlagPin);
 	#endif
 	for (uint8_t ii = 0; ii<CAP_NUM; ii++) {
@@ -34,8 +37,10 @@ void capStart(void){
 
 	CAP_PORT0 = 0;
 	CAP_PORT1 = 0;
-	
-	for(uint8_t ii = 0; ii<100; ii++);
+	//dbFlagPORT |= (1<<dbFlagPin);
+	volatile uint8_t leer = 0;
+	for(uint8_t ii = 0; ii < 127; ii++){leer ++;}
+	//dbFlagPORT &= ~(1<<dbFlagPin);
 }
 
 void capLaden(void){
@@ -63,9 +68,9 @@ uint8_t readOneCap(uint8_t ii, volatile uint8_t * pinptr){
 	capStart();
 
 	uint8_t mask = (1 << ((ii * 2)%8 + 1));
-	uint8_t zykles = 0;
+	uint16_t zykles = 0;
 
-	while(zykles < 255){
+	while(zykles < 1024){
 		//Sensor aufladen
 		capLaden();
 
@@ -77,7 +82,10 @@ uint8_t readOneCap(uint8_t ii, volatile uint8_t * pinptr){
 
 		//Ladung messen
 		if((*pinptr) & mask)
-			return zykles;
+		{
+			uint16_t result = zykles/4;
+			return (uint8_t) result;
+		}
 		zykles ++;
 
 	}
@@ -118,7 +126,7 @@ uint8_t readCap(void){
 	}
 #endif
 
-#ifdef DEBUG_TASTEN
+#ifdef DEBUG_TASTEN_TRIGGER
 	dbFlagPORT |= (1<<dbFlagPin);
 #endif /* DEBUG_TASTEN */
 
@@ -126,7 +134,7 @@ uint8_t readCap(void){
 	for(uint8_t ii = 0; ii<CAP_NUM; ii++) {
 		//wenn Pin an, dann prüfe, ob laufzeit wieder steigt
 		if(status & (1<<ii)) {
-			if (laufzeit_buffer[ii][counter] > (avg[ii] + CAP_TOLERANZ)) {
+			if (laufzeit_buffer[ii][counter] > (avg[ii] + CAP_TOLERANZ_AUS)) {
 				abweich_count[ii]++;
 			} else {
 				abweich_count[ii] = 0;
@@ -138,7 +146,7 @@ uint8_t readCap(void){
 			}
 		//wenn Pin aus, dann prüfe, ob laufzeit singt
 		} else {
-			if (laufzeit_buffer[ii][counter] < (avg[ii] - CAP_TOLERANZ)) {
+			if (laufzeit_buffer[ii][counter] < (avg[ii] - CAP_TOLERANZ_AN)) {
 				abweich_count[ii]--;
 			} else {
 				abweich_count[ii] = 0;
@@ -151,19 +159,20 @@ uint8_t readCap(void){
 		}
 	}
 
-#ifdef DEBUG_TASTEN
+#ifdef DEBUG_TASTEN_TRIGGER
 	dbFlagPORT &= ~(1<<dbFlagPin);
 #endif /* DEBUG_TASTEN */
 
-#ifdef DEBUG_TASTEN
-	if(status & (0xff)){	//Wenn erste Taste gedrückt
+/*#ifdef DEBUG_TASTEN
+	if(status & (0xff)){			//Wenn Taste gedrückt
 		SYS_PORT &= ~(1 << LED);	//LED aus
 	} else {
 		SYS_PORT |= (1 << LED);		//LED an
 	}
-#endif
+#endif*/
 
-	counter++;
+	//if(counter < 255)
+		counter++;
 
 	//reset counter, wenn Maxwert erreicht
 	if(counter == BUFFER_SIZE)
